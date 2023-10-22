@@ -21,7 +21,8 @@ format:
 <br/>
 <br/>
 <br/>
-Vista este [repositorio](https://quarto.org)
+Vista este [repositorio](https://github.com/AltamarMx/DataLab) y descarga el zip
+
 
 
 
@@ -31,35 +32,46 @@ Vista este [repositorio](https://quarto.org)
 
 <br/>
 <br/>
-<br/>
 
-Quien tome el taller conocerá las capacidades y limitaciones de ChatGPT-3.5 para realizar análisis de datos en ingeniería para limpiar y visualizar datos utilizando Python, Matplotlib y Seaborn.
+Conocer las capacidades y 
+limitaciones 
+de ChatGPT-3.5 para:
+
+1. Limpiar datos 
+1. Visualizar datos utilizando Python, Matplotlib y Seaborn
+1. Realizar análisis de datos en ingeniería 
 
 
 
+## Prepárate
 
 
-## pip install 
-
-
-<br/>
-<br/>
-
-#### Instala
-```python   
-pip install pandas matplotlib seaborn
+::: {.callout-note}
+## Instalacion local de Python y Jupyter Notebook
+```python
+pip install pandas seaborn matplotlib
 ```
+:::
+
+::: {.callout-tip}
+## Click en google colab
+
+This is an example of a callout with a title.
+:::
 
 
 
-## 
+
+
+
+## Accuray & Hallucination
 
 > **Accuracy** concerns whether the answer is right or wrong based on the input.
 
 ![](images/accuracy.jpeg)
 
 
-##  
+## Accuray & Hallucination
 > **Hallucination** concerns the introduction of unrelated or nonsensical information that wasn't present or implied in the input.
 
 ![](images/hallucination.jpeg)
@@ -90,38 +102,26 @@ pip install pandas matplotlib seaborn
 ![](images/gpt-load-data.jpeg)
  -->
 
-## Teachers
+## Doble filo: malas practicas o facilidad
+
+<br/>
+<br/>
+
+::: {.incremental}
+- Overleaf
+- Visual Studio
+- ChatGPT
+:::
 
 
-* Continuos learning
+## Buenas practicas
+<br/>
 
 
-
-* Incentivize the detection of errors and hallucinations in LLMs
-<!-- * AI as a tool -->
-
-* AI serves pedagogical objectives and not the other way 
-
-
-* Consider the use of free or open alternatives
-
-
-## Students
-
-* Learn new technologies 
-
-* Avoid dependency
-
-* Communication skills for AI-based systems
-
-* Privacy and ethics
- 
-* Critical thinking
-
-
-## To Code or to GPT ?
-<br>
-In the age of AI, as we stand on the cusp of remarkable technological advancements, it's imperative that we both program and utilize tools like GPT with a discerning eye. 
-<br>
-<br>
-We must be critically aware of their capabilities, embrace their strengths, and cautiously navigate their limitations. Let's not be mere passive users; let's be conscious architects of our digital future, ensuring AI serves humanity's best interests.
+::: {.incremental}
+1. Importar paquetes en la primera celda
+1. Agrupar conjunto de operaciones
+1. Comentar proceso
+1. Narrativa computacional
+1. Uso de sistema de versionado (github)
+:::
