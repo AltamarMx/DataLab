@@ -392,7 +392,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">ChatGPT DataLab</h1>
-  <p class="subtitle"><span style="font-size:2em;">Visualiza &amp; Comprende </span> <br><span style="font-size:.8em;">Guillermo Barrios del Valle<br> IER-UNAM, México.</span></p>
+  <p class="subtitle"><span style="font-size:2em;">Visualiza &amp; Comprende </span> <br><span style="font-size:.8em;">Dr.&nbsp;Guillermo Barrios del Valle<br> IER-UNAM, México.</span></p>
 
 <div class="quarto-title-authors">
 </div>
@@ -400,10 +400,17 @@
 </section>
 <section id="antes-de-empezar" class="slide level2">
 <h2>Antes de empezar</h2>
-<p><br> <br> <br> Vista este <a href="https://github.com/AltamarMx/DataLab">repositorio</a> y descarga el zip</p>
-</section>
-<section id="objetivo" class="slide level2">
-<h2>Objetivo</h2>
+<style>
+.callout-note pre code {
+    font-size: 1.5em;  /* Ajusta el tamaño según tus preferencias */
+}
+</style>
+<p>Vista este <a href="https://github.com/AltamarMx/DataLab">repositorio</a> y descarga el zip <br></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1"></a>https://github.com/AltamarMx/DataLab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img data-src="images/repo.png" class="r-stretch"></section>
+<section id="objetivo-general" class="slide level2">
+<h2>Objetivo general</h2>
 <p><br> <br></p>
 <p>Conocer las capacidades y limitaciones de ChatGPT-3.5 para:</p>
 <ol type="1">
@@ -414,6 +421,7 @@
 </section>
 <section id="prepárate" class="slide level2">
 <h2>Prepárate</h2>
+<p><br> <br> <br></p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -423,38 +431,43 @@
 <p><strong>Instalacion local de Python y Jupyter Notebook</strong></p>
 </div>
 <div class="callout-content">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>pip install pandas seaborn matplotlib</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>pip install pandas seaborn matplotlib</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="prepárate-1" class="slide level2">
+<h2>Prepárate</h2>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Click en google colab</strong></p>
+<p><strong>Google colab</strong></p>
 </div>
 <div class="callout-content">
-<p>This is an example of a callout with a title.</p>
+<p><img data-src="images/colab.png"></p>
 </div>
 </div>
 </div>
 </section>
-<section id="accuray-hallucination" class="slide level2">
-<h2>Accuray &amp; Hallucination</h2>
+<section id="precisión-alucinación" class="slide level2">
+<h2>Precisión &amp; Alucinación</h2>
 <blockquote>
-<p><strong>Accuracy</strong> concerns whether the answer is right or wrong based on the input.</p>
+<p><strong>Precisión</strong> se refiere a si la respuesta es correcta o incorrecta con base en la entrada.</p>
 </blockquote>
 
 <img data-src="images/accuracy.jpeg" class="r-stretch"></section>
-<section id="accuray-hallucination-1" class="slide level2">
-<h2>Accuray &amp; Hallucination</h2>
+<section id="precisión-alucinación-1" class="slide level2">
+<h2>Precisión &amp; Alucinación</h2>
 <blockquote>
-<p><strong>Hallucination</strong> concerns the introduction of unrelated or nonsensical information that wasn’t present or implied in the input.</p>
+<p><strong>Alucinación</strong> se refiere a la introducción de información no relacionada o sin sentido que no estaba presente ni se insinuaba en la entrada.</p>
 </blockquote>
 <p><img data-src="images/hallucination.jpeg"> <!-- 
-## Hallucination & Accuracy
+
+
+## Precisión & Alucinación
 
 ![](images/accuracy_hallucination.png)
 
@@ -463,18 +476,12 @@
 [Performance of ChatGPT, GPT-4, and Google Bard on a Neurosurgery Oral Boards Preparation Question Bank](https://www.medrxiv.org/content/10.1101/2023.04.06.23288265v1#:~:text=GPT-4%E2%80%99s%20performance%20on%20imaging-related%20questions%20surpassed%20GPT-3.5%E2%80%99s%20%2868.6%25,%3C0.001%29%20and%20Bard%20%282.3%25%20vs.%2027.3%25%2C%20P%20%3D0.002%29.)
 ::: --></p>
 </section>
-<section id="accuracy-hallucination" class="slide level2">
-<h2>Accuracy &amp; Hallucination</h2>
+<section id="precisión-alucinación-2" class="slide level2">
+<h2>Precisión &amp; Alucinación</h2>
 
 <img data-src="images/accuracy_hallucination_horizontal.png" class="r-stretch"><div class="footer">
 <p><a href="https://www.medrxiv.org/content/10.1101/2023.04.06.23288265v1#:~:text=GPT-4%E2%80%99s%20performance%20on%20imaging-related%20questions%20surpassed%20GPT-3.5%E2%80%99s%20%2868.6%25,%3C0.001%29%20and%20Bard%20%282.3%25%20vs.%2027.3%25%2C%20P%20%3D0.002%29.">Performance of ChatGPT, GPT-4, and Google Bard on a Neurosurgery Oral Boards Preparation Question Bank</a></p>
 </div>
-<!-- 
-## Few undergrads pay  GPT-4 
-
-
-![](images/gpt-load-data.jpeg)
- -->
 </section>
 <section id="doble-filo-malas-practicas-o-facilidad" class="slide level2">
 <h2>Doble filo: malas practicas o facilidad</h2>
@@ -487,8 +494,8 @@
 </ul>
 </div>
 </section>
-<section id="buenas-practicas" class="slide level2">
-<h2>Buenas practicas</h2>
+<section id="buenas-practicas-en-ciencia-de-datos-con-jupyter-notebooks" class="slide level2">
+<h2>Buenas practicas en ciencia de datos con Jupyter notebooks</h2>
 <p><br></p>
 <div>
 <ol type="1">
@@ -497,6 +504,65 @@
 <li class="fragment">Comentar proceso</li>
 <li class="fragment">Narrativa computacional</li>
 <li class="fragment">Uso de sistema de versionado (github)</li>
+</ol>
+</div>
+</section>
+<section id="el-problema" class="slide level2">
+<h2>El problema</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>data/H2O.csv</strong></p>
+</div>
+<div class="callout-content">
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1"></a>ts,Litros 1</span>
+<span id="cb3-2"><a href="#cb3-2"></a>2023-05-09 16:00:00,8.97283</span>
+<span id="cb3-3"><a href="#cb3-3"></a>2023-05-09 17:00:00,0.0</span>
+<span id="cb3-4"><a href="#cb3-4"></a>2023-05-09 18:00:00,0.0</span>
+<span id="cb3-5"><a href="#cb3-5"></a>2023-05-09 19:00:00,0.0</span>
+<span id="cb3-6"><a href="#cb3-6"></a>2023-05-09 20:00:00,0.0</span>
+<span id="cb3-7"><a href="#cb3-7"></a>2023-05-09 21:00:00,0.0</span>
+<span id="cb3-8"><a href="#cb3-8"></a>2023-05-09 22:00:00,0.0</span>
+<span id="cb3-9"><a href="#cb3-9"></a>2023-05-09 23:00:00,0.0</span>
+<span id="cb3-10"><a href="#cb3-10"></a>2023-05-10 00:00:00,0.0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Archivo online</strong></p>
+</div>
+<div class="callout-content">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1"></a>f = 'https://www.ier.unam.mx/~gbv/DataLab/H2O.csv' </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="suposiciones" class="slide level2">
+<h2>Suposiciones</h2>
+<p><br> <br> <br></p>
+<div>
+<ol type="1">
+<li class="fragment">No soy experto en análisis de consumo de agua</li>
+<li class="fragment">No sé detectar anomalías</li>
+<li class="fragment">No soy experto visualizando</li>
+</ol>
+</div>
+</section>
+<section id="objetivos-específicos" class="slide level2">
+<h2>Objetivos específicos</h2>
+<div>
+<ol type="1">
+<li class="fragment">Entender los datos</li>
+<li class="fragment">Propuestas de análisis o visualización</li>
+<li class="fragment">Detectar anomalias</li>
 </ol>
 </div>
 
@@ -530,7 +596,7 @@
       // https://revealjs.com/config/
       Reveal.initialize({
 'controlsAuto': true,
-'previewLinksAuto': true,
+'previewLinksAuto': false,
 'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
