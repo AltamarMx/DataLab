@@ -1,8 +1,10 @@
 ---
 title: "ChatGPT DataLab"
 subtitle: "<span style='font-size:2em;'>Visualiza & Comprende </span>
-<br><span style='font-size:.8em;'>Dr. Guillermo Barrios del Valle<br> 
-IER-UNAM, México.</span> "
+<br> <br><span style='font-size:.7em;'> Diego Arturo Canul Reyes <br>
+dacr@ier.unam.mx  <br> <br> Guillermo Barrios del Valle<br>
+gbv@ier.unam.mx <br> <br>
+Instituto de Energías Renovables - UNAM.</span> "
 format:
  revealjs:
    slide-number: true
@@ -10,10 +12,9 @@ format:
      buttons: false
    preview-links: false
    logo: images/logo_ier.png
-   footer: <https://AltamarMx.github.io>
-
+   footer: '<a href="https://www.linkedin.com/in/diego-arturo-canul-reyes-98b56510b/" target="_blank">LinkedIn: Diego Arturo Canul Reyes</a>'
 ---
- 
+
 
 ## Antes de empezar
 
@@ -41,13 +42,13 @@ https://github.com/AltamarMx/DataLab
 <br/>
 <br/>
 
-Conocer las capacidades y 
-limitaciones 
+Conocer las capacidades y
+limitaciones
 de ChatGPT-3.5 para:
 
-1. Limpiar datos 
+1. Limpiar datos
 1. Visualizar datos utilizando Python, Matplotlib y Seaborn
-1. Realizar análisis de datos en ingeniería 
+1. Realizar análisis de datos en ingeniería
 
 
 
@@ -98,14 +99,14 @@ pip install pandas seaborn matplotlib
 
 
 ![](images/hallucination.jpeg)
-<!-- 
+<!--
 
 
 ## Precisión & Alucinación
 
 ![](images/accuracy_hallucination.png)
 
- 
+
 ::: footer
 [Performance of ChatGPT, GPT-4, and Google Bard on a Neurosurgery Oral Boards Preparation Question Bank](https://www.medrxiv.org/content/10.1101/2023.04.06.23288265v1#:~:text=GPT-4%E2%80%99s%20performance%20on%20imaging-related%20questions%20surpassed%20GPT-3.5%E2%80%99s%20%2868.6%25,%3C0.001%29%20and%20Bard%20%282.3%25%20vs.%2027.3%25%2C%20P%20%3D0.002%29.)
 ::: -->
@@ -115,7 +116,7 @@ pip install pandas seaborn matplotlib
 
 ![](images/accuracy_hallucination_horizontal.png)
 
- 
+
 ::: footer
 [Performance of ChatGPT, GPT-4, and Google Bard on a Neurosurgery Oral Boards Preparation Question Bank](https://www.medrxiv.org/content/10.1101/2023.04.06.23288265v1#:~:text=GPT-4%E2%80%99s%20performance%20on%20imaging-related%20questions%20surpassed%20GPT-3.5%E2%80%99s%20%2868.6%25,%3C0.001%29%20and%20Bard%20%282.3%25%20vs.%2027.3%25%2C%20P%20%3D0.002%29.)
 :::
@@ -133,8 +134,8 @@ pip install pandas seaborn matplotlib
 :::
 
 
-## Buenas practicas en ciencia de datos con Jupyter notebooks
-<br/>
+## Buenas practicas   con Jupyter notebooks & ChatGPT
+
 
 
 ::: {.incremental}
@@ -143,6 +144,7 @@ pip install pandas seaborn matplotlib
 1. Comentar proceso
 1. Narrativa computacional
 1. Uso de sistema de versionado (github)
+1. Prueba los prompts
 :::
 
 
@@ -171,7 +173,7 @@ ts,Litros 1
 ::: {.callout-note collapse="true"}
 ## Archivo online
 ```default
-f = 'https://www.ier.unam.mx/~gbv/DataLab/H2O.csv' 
+f = 'https://www.ier.unam.mx/~gbv/DataLab/H2O.csv'
 ```
 :::
 
@@ -191,9 +193,19 @@ f = 'https://www.ier.unam.mx/~gbv/DataLab/H2O.csv'
 
 ## Objetivos específicos
 
+<br/>
+<br/>
 
 ::: {.incremental}
 1. Entender los datos
 1. Propuestas de análisis o visualización
 1. Detectar anomalias
 :::
+
+
+
+
+## Vamos ChatGPT-3.5
+<div style="text-align:center;">
+   <img src="images/GPT-3.png" alt="GPT-3" style="width:80%;"/>
+</div>
