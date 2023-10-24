@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="G. Barrios   D. Canul">
+<meta name="author" content="G. Barrios   D. Canul-Reyes">
 
 <title>ChatGPT DataLab Visualiza &amp; Comprende</title>
 <style>
@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Autores</div>
     <div class="quarto-title-meta-contents">
-             <p>G. Barrios <br> D. Canul </p>
+             <p>G. Barrios <br> D. Canul-Reyes </p>
           </div>
   </div>
     
@@ -123,27 +123,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<div class="cell" data-execution_count="1">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="2">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="st">'https://www.ier.unam.mx/~gbv/DataLab/H2O.csv'</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>agua <span class="op">=</span> pd.read_csv(f,index_col<span class="op">=</span><span class="dv">0</span>,parse_dates<span class="op">=</span><span class="va">True</span>,names<span class="op">=</span>[<span class="st">'t'</span>,<span class="st">'consumo'</span>],skiprows<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>agua.plot(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">4</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display">
 <pre><code>&lt;Axes: xlabel='t'&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="001_importa_datos_Guion_2try_files/figure-html/cell-3-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="3">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>agua.resample(<span class="st">'D'</span>).<span class="bu">sum</span>().plot(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">4</span>),kind<span class="op">=</span><span class="st">'bar'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display">
 <pre><code>&lt;Axes: xlabel='t'&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -152,18 +152,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="prompt" class="level2">
 <h2 class="anchored" data-anchor-id="prompt">Prompt</h2>
-<div class="cell" data-execution_count="4">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">Tengo un dataframe llamado agua con un índice que es datetime con datos cada hora en una columna llamada consumo.</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">Quiero calcular el promedio de consumo  de la serie temporal y luego detectar donde el consumo diario sea mayor al promedio diario de la serie temporal.</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display">
 <pre><code>'\nTengo un dataframe llamado agua con un índice que es datetime con datos cada hora en una columna llamada consumo.\n\n\nQuiero calcular el promedio de consumo  de la serie temporal y luego detectar donde el consumo diario sea mayor al promedio diario de la serie temporal.\n'</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="5">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegúrate de que la columna de índice sea de tipo datetime</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># agua.index = pd.to_datetime(agua.index)</span></span>
@@ -235,17 +235,17 @@ Name: consumo, dtype: float64</code></pre>
 </section>
 <section id="prompt-1" class="level2">
 <h2 class="anchored" data-anchor-id="prompt-1">Prompt</h2>
-<div class="cell" data-execution_count="6">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">que visualización me propones de la serie temporal para localizar los días con consumo diario mayor que el promedio ? </span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display">
 <pre><code>'\nque visualización me propones de la serie temporal para localizar los días con consumo diario mayor que el promedio ? \n\n\n'</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="7">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import matplotlib.pyplot as plt</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear un gráfico de líneas de consumo diario</span></span>
@@ -269,7 +269,7 @@ Name: consumo, dtype: float64</code></pre>
 <p><img src="001_importa_datos_Guion_2try_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="8">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import matplotlib.pyplot as plt</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear un gráfico de barras de consumo diario</span></span>
@@ -295,17 +295,17 @@ Name: consumo, dtype: float64</code></pre>
 </section>
 <section id="prompt-2" class="level2">
 <h2 class="anchored" data-anchor-id="prompt-2">Prompt</h2>
-<div class="cell" data-execution_count="9">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">a la segunda gráfica le puedes agregar algo para hacer evidente el valor del promedio diario ? </span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display">
 <pre><code>'\na la segunda gráfica le puedes agregar algo para hacer evidente el valor del promedio diario ? \n\n\n'</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="10">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import matplotlib.pyplot as plt</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear un gráfico de barras de consumo diario</span></span>
@@ -331,7 +331,7 @@ Name: consumo, dtype: float64</code></pre>
 <p><img src="001_importa_datos_Guion_2try_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="11">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import pandas as pd</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># import matplotlib.pyplot as plt</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -377,12 +377,12 @@ Name: consumo, dtype: float64</code></pre>
 </section>
 <section id="prompt-3" class="level2">
 <h2 class="anchored" data-anchor-id="prompt-3">Prompt</h2>
-<div class="cell" data-execution_count="12">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">Me puedes recomendar diez sugerencias para analizar comportamientos anómalos para consumo de agua. Considera el dataframe agua con consumos cada hora.</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display">
 <pre><code>'\nMe puedes recomendar diez sugerencias para analizar comportamientos anómalos para consumo de agua. Considera el dataframe agua con consumos cada hora.\n\n'</code></pre>
 </div>
 </div>
@@ -393,7 +393,7 @@ Name: consumo, dtype: float64</code></pre>
 </figure>
 </div>
 <p>Tomo la opci’on de boxplot</p>
-<div class="cell" data-execution_count="13">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>consumo_diario <span class="op">=</span> agua[<span class="st">'consumo'</span>].resample(<span class="st">'D'</span>).<span class="bu">sum</span>()</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># import matplotlib.pyplot as plt</span></span>
@@ -410,16 +410,16 @@ Name: consumo, dtype: float64</code></pre>
 </section>
 <section id="prompt-4" class="level2">
 <h2 class="anchored" data-anchor-id="prompt-4">Prompt</h2>
-<div class="cell" data-execution_count="14">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">alrededor de 8 puntos quedaron fuera de los bigotes, como identifico esos días de mi serie temporal ? </span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display">
 <pre><code>'\nalrededor de 8 puntos quedaron fuera de los bigotes, como identifico esos días de mi serie temporal ? \n\n'</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="15">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear el diagrama de caja y obtener los valores atípicos</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>boxplot <span class="op">=</span> plt.boxplot(consumo_diario, vert<span class="op">=</span><span class="va">False</span>)</span>
@@ -453,17 +453,17 @@ Name: consumo, dtype: float64</code></pre>
 </section>
 <section id="prompt-5" class="level2">
 <h2 class="anchored" data-anchor-id="prompt-5">Prompt</h2>
-<div class="cell" data-execution_count="16">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">ayudame a graficar esos días en una grafica de consumo diario usando barras e incluye el umbral con una línea roja el valor donde el consumo diario comienza a considerarse atípico de acuerdo a la boxplot.</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display">
 <pre><code>'\nayudame a graficar esos días en una grafica de consumo diario usando barras e incluye el umbral con una línea roja el valor donde el consumo diario comienza a considerarse atípico de acuerdo a la boxplot.\n\n\n'</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="17">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import matplotlib.pyplot as plt</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># import numpy as np</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -501,11 +501,11 @@ Name: consumo, dtype: float64</code></pre>
 </section>
 <section id="prompt-6" class="level2">
 <h2 class="anchored" data-anchor-id="prompt-6">Prompt</h2>
-<div class="cell" data-scrolled="true" data-execution_count="18">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">Ahora explicame como sería detectar anomalias usando histogramas</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display">
 <pre><code>'\nAhora explicame como sería detectar anomalias usando histogramas\n'</code></pre>
 </div>
 </div>
@@ -515,7 +515,7 @@ Name: consumo, dtype: float64</code></pre>
 <figcaption class="figure-caption">image.png</figcaption>
 </figure>
 </div>
-<div class="cell" data-execution_count="19">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
@@ -534,16 +534,16 @@ Name: consumo, dtype: float64</code></pre>
 <figcaption class="figure-caption">image.png</figcaption>
 </figure>
 </div>
-<div class="cell" data-execution_count="20">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>percentil_inferior <span class="op">=</span> np.percentile(consumo_diario, <span class="dv">5</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>percentil_superior <span class="op">=</span> np.percentile(consumo_diario, <span class="dv">95</span>)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Identificar días con anomalías</span></span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>dias_anomalos <span class="op">=</span> consumo_diario[(consumo_diario <span class="op">&lt;</span> percentil_inferior) <span class="op">|</span> (consumo_diario <span class="op">&gt;</span> percentil_superior)].index</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="21">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>dias_anomalos</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell-output cell-output-display">
 <pre><code>DatetimeIndex(['2023-06-22', '2023-06-30', '2023-07-19', '2023-07-20',
                '2023-08-21', '2023-08-24', '2023-09-06'],
               dtype='datetime64[ns]', name='t', freq=None)</code></pre>
@@ -552,16 +552,16 @@ Name: consumo, dtype: float64</code></pre>
 </section>
 <section id="prompt-7" class="level2">
 <h2 class="anchored" data-anchor-id="prompt-7">Prompt</h2>
-<div class="cell" data-execution_count="22">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">ayudame a visualizar estos días anomalos dentro de la serie de datos del consumo diario.</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display">
 <pre><code>'\nayudame a visualizar estos días anomalos dentro de la serie de datos del consumo diario.\n\n'</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="23">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import matplotlib.pyplot as plt</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear una gráfica de barras del consumo diario de agua</span></span>
