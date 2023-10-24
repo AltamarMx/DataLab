@@ -46,9 +46,8 @@ Conocer las capacidades y
 limitaciones
 de ChatGPT-3.5 para:
 
-1. Limpiar datos
-1. Visualizar datos utilizando Python, Matplotlib y Seaborn
-1. Realizar análisis de datos en ingeniería
+1. Visualizar datos utilizando Python, pandas y matplotlib 
+1. Realizar análisis de datos anómalos
 
 
 
@@ -61,7 +60,7 @@ de ChatGPT-3.5 para:
 ::: {.callout-note}
 ## Instalacion local de Python y Jupyter Notebook
 ```python
-pip install pandas seaborn matplotlib
+pip install pandas  matplotlib
 ```
 :::
 
