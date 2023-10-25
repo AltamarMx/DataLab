@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>analisis_resultado_taller</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="002_analisis_resultado_taller_files/libs/clipboard/clipboard.min.js"></script>
+<script src="002_analisis_resultado_taller_files/libs/quarto-html/quarto.js"></script>
+<script src="002_analisis_resultado_taller_files/libs/quarto-html/popper.min.js"></script>
+<script src="002_analisis_resultado_taller_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="002_analisis_resultado_taller_files/libs/quarto-html/anchor.min.js"></script>
+<link href="002_analisis_resultado_taller_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="002_analisis_resultado_taller_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="002_analisis_resultado_taller_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="002_analisis_resultado_taller_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="002_analisis_resultado_taller_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="st">'https://www.ier.unam.mx/~gbv/DataLab/H2O.csv'</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>agua <span class="op">=</span> pd.read_csv(f, index_col<span class="op">=</span><span class="dv">0</span>, parse_dates<span class="op">=</span><span class="va">True</span>, names<span class="op">=</span>[<span class="st">"t"</span>,<span class="st">"consumo"</span>], skiprows<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>agua</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">consumo</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-05-09 16:00:00</td>
+<td>8.972830</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2023-05-09 17:00:00</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-05-09 18:00:00</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2023-05-09 19:00:00</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-05-09 20:00:00</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-09-11 14:00:00</td>
+<td>116.504207</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2023-09-11 15:00:00</td>
+<td>47.957438</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-09-11 16:00:00</td>
+<td>185.493111</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2023-09-11 17:00:00</td>
+<td>84.713657</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-09-11 18:00:00</td>
+<td>93.173990</td>
+</tr>
+</tbody>
+</table>
+
+<p>3003 rows × 1 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>agua.plot(figsize<span class="op">=</span>(<span class="dv">15</span>,<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>&lt;AxesSubplot:xlabel='t'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-4-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>agua.resample(<span class="st">"D"</span>).<span class="bu">sum</span>().plot(figsize<span class="op">=</span>(<span class="dv">15</span>,<span class="dv">5</span>), kind<span class="op">=</span><span class="st">"bar"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>&lt;AxesSubplot:xlabel='t'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-5-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegúrate de que el índice del DataFrame sea de tipo datetime</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>agua.index <span class="op">=</span> pd.to_datetime(agua.index)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula el promedio de consumo de la serie temporal</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>promedio_consumo <span class="op">=</span> agua[<span class="st">'consumo'</span>].mean()</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Agrupa los datos por día y calcula el consumo diario promedio</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>consumo_diario_promedio <span class="op">=</span> agua.resample(<span class="st">'D'</span>)[<span class="st">'consumo'</span>].mean()</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Detecta dónde el consumo diario es mayor al promedio diario</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>mayor_al_promedio <span class="op">=</span> consumo_diario_promedio[consumo_diario_promedio <span class="op">&gt;</span> promedio_consumo]</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Promedio de consumo:"</span>, promedio_consumo)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Días con consumo diario mayor al promedio:"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mayor_al_promedio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Promedio de consumo: 18.435921090090545
+Días con consumo diario mayor al promedio:
+t
+2023-05-17     21.430137
+2023-05-18     19.695634
+2023-05-22     20.279322
+2023-05-24     21.140607
+2023-06-05     24.211173
+2023-06-06     23.215745
+2023-06-07     20.976846
+2023-06-09     21.874218
+2023-06-10     24.459373
+2023-06-12     23.283658
+2023-06-14     20.151127
+2023-06-19     27.541435
+2023-06-20     37.408509
+2023-06-22     62.463487
+2023-06-23     37.514282
+2023-06-26     21.572202
+2023-06-27     24.365565
+2023-06-28     38.258998
+2023-06-29     20.813824
+2023-06-30    175.094745
+2023-07-03     22.752622
+2023-07-04     28.075609
+2023-07-11     19.875613
+2023-07-12     21.944750
+2023-07-17     55.733598
+2023-07-18     30.307988
+2023-07-19     57.962785
+2023-07-20     61.349675
+2023-07-21     32.510590
+2023-07-24     34.727236
+2023-07-25     30.435689
+2023-07-26     28.239998
+2023-07-27     25.276776
+2023-07-28     26.177287
+2023-08-15     21.477298
+2023-08-18     19.465839
+2023-08-21     82.065231
+2023-08-24    137.084177
+2023-09-04     52.781749
+2023-09-05     45.496319
+2023-09-06    115.593746
+2023-09-07     50.616241
+2023-09-08     51.234210
+2023-09-11     54.013218
+Name: consumo, dtype: float64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Traza la serie temporal diaria</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>agua.resample(<span class="st">'D'</span>)[<span class="st">'consumo'</span>].mean().plot(label<span class="op">=</span><span class="st">'Consumo Diario'</span>, figsize<span class="op">=</span>(<span class="dv">15</span>,<span class="dv">5</span>))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Traza una línea horizontal en el promedio</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span>promedio_consumo, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'Promedio Diario'</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Resalta los puntos donde el consumo diario es mayor que el promedio</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>plt.scatter(mayor_al_promedio.index, mayor_al_promedio, color<span class="op">=</span><span class="st">'g'</span>, label<span class="op">=</span><span class="st">'Días con consumo mayor que el promedio'</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fecha'</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo'</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>agua[<span class="st">'consumo'</span>].resample(<span class="st">'D'</span>).mean().plot(kind<span class="op">=</span><span class="st">'hist'</span>, bins<span class="op">=</span><span class="dv">20</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">'Consumo Diario'</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span>promedio_consumo, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'Promedio Diario'</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Consumo Diario'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Frecuencia'</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>agua[<span class="st">'consumo'</span>].resample(<span class="st">'D'</span>).mean().plot(kind<span class="op">=</span><span class="st">'box'</span>, vert<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Consumo Diario'</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>consumo_diario_promedio <span class="op">=</span> agua.copy()</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear una columna que indique si el consumo diario supera el promedio</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>consumo_diario_promedio[<span class="st">'Superior al Promedio'</span>] <span class="op">=</span> consumo_diario_promedio[<span class="st">'consumo'</span>] <span class="op">&gt;</span> promedio_consumo</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar el consumo diario con colores diferentes para los días superiores</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> np.where(consumo_diario_promedio[<span class="st">'Superior al Promedio'</span>], <span class="st">'r'</span>, <span class="st">'b'</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.bar(consumo_diario_promedio.index, consumo_diario_promedio[<span class="st">'consumo'</span>], color<span class="op">=</span>colors)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fecha'</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo Diario'</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Consumo Diario con Días Superiores al Promedio Resaltados'</span>)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear una columna que indique si el consumo diario supera el promedio</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>consumo_diario_promedio[<span class="st">'Superior al Promedio'</span>] <span class="op">=</span> consumo_diario_promedio[<span class="st">'consumo'</span>] <span class="op">&gt;</span> promedio_consumo</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear un arreglo de colores para las barras</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> np.where(consumo_diario_promedio[<span class="st">'Superior al Promedio'</span>], <span class="st">'r'</span>, <span class="st">'b'</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear el gráfico de barras</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>plt.bar(consumo_diario_promedio.index, consumo_diario_promedio[<span class="st">'consumo'</span>], color<span class="op">=</span>colors)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>plt.axhline(promedio_consumo, color<span class="op">=</span><span class="st">'g'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'Promedio Diario'</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fecha'</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo Diario'</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Consumo Diario con Días Superiores al Promedio Resaltados'</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tienes un DataFrame llamado 'agua' con un índice datetime y una columna 'consumo'.</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula las desviaciones estándar horarias</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>desviacion_estandar_horaria <span class="op">=</span> agua[<span class="st">'consumo'</span>].std()</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Define un umbral para identificar outliers (por ejemplo, 2 desviaciones estándar)</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>umbral <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> desviacion_estandar_horaria</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Encuentra las horas con outliers</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>outliers_horarios <span class="op">=</span> agua[agua[<span class="st">'consumo'</span>] <span class="op">&gt;</span> umbral]</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea un gráfico de puntos para visualizar los outliers</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>plt.plot(agua.index, agua[<span class="st">'consumo'</span>], label<span class="op">=</span><span class="st">'Consumo Horario'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>plt.scatter(outliers_horarios.index, outliers_horarios[<span class="st">'consumo'</span>], color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Outliers'</span>, s<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Hora del Día'</span>)</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo de Agua'</span>)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Detección de Outliers Horarios en el Consumo de Agua'</span>)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-12-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Agrupa los datos por mes y crea un boxplot</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>agua[<span class="st">'Month'</span>] <span class="op">=</span> agua.index.month</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">24</span>))</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>agua.boxplot(column<span class="op">=</span><span class="st">'consumo'</span>, by<span class="op">=</span><span class="st">'Month'</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Mes'</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo de Agua'</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Boxplot Mensual del Consumo de Agua'</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">''</span>)  <span class="co"># Para quitar el título automático generado por Pandas</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 864x1728 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-13-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aplicar un promedio móvil semanal para suavizar la serie temporal</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>agua[<span class="st">'Consumo Suavizado'</span>] <span class="op">=</span> agua[<span class="st">'consumo'</span>].rolling(window<span class="op">=</span><span class="dv">7</span>, center<span class="op">=</span><span class="va">True</span>).mean()</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.plot(agua.index, agua[<span class="st">'Consumo Suavizado'</span>], label<span class="op">=</span><span class="st">'Consumo Suavizado'</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fecha'</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo de Agua'</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Consumo de Agua con Suavizado para Visualizar Patrones Estacionales'</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-14-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que ya tienes el DataFrame 'agua' con un índice datetime y una columna 'consumo'.</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegúrate de que el índice sea de tipo datetime.</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>agua.index <span class="op">=</span> pd.to_datetime(agua.index)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Agrupa los datos por semana y crea un boxplot semanal</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>semana_anual <span class="op">=</span> agua.index.to_period(<span class="st">'W-SUN'</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>agua[<span class="st">'Week'</span>] <span class="op">=</span> semana_anual</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>agua.boxplot(column<span class="op">=</span><span class="st">'consumo'</span>, by<span class="op">=</span><span class="st">'Week'</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Semana del Año'</span>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo de Agua'</span>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Boxplot Semanal del Consumo de Agua'</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">''</span>)  <span class="co"># Para quitar el título automático generado por Pandas</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 864x432 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-15-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>agua</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">consumo</th>
+<th data-quarto-table-cell-role="th">Month</th>
+<th data-quarto-table-cell-role="th">Consumo Suavizado</th>
+<th data-quarto-table-cell-role="th">Week</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-05-09 16:00:00</td>
+<td>8.972830</td>
+<td>5</td>
+<td>NaN</td>
+<td>2023-05-08/2023-05-14</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2023-05-09 17:00:00</td>
+<td>0.000000</td>
+<td>5</td>
+<td>NaN</td>
+<td>2023-05-08/2023-05-14</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-05-09 18:00:00</td>
+<td>0.000000</td>
+<td>5</td>
+<td>NaN</td>
+<td>2023-05-08/2023-05-14</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2023-05-09 19:00:00</td>
+<td>0.000000</td>
+<td>5</td>
+<td>1.281833</td>
+<td>2023-05-08/2023-05-14</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-05-09 20:00:00</td>
+<td>0.000000</td>
+<td>5</td>
+<td>0.000000</td>
+<td>2023-05-08/2023-05-14</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-09-11 14:00:00</td>
+<td>116.504207</td>
+<td>9</td>
+<td>107.192880</td>
+<td>2023-09-11/2023-09-17</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2023-09-11 15:00:00</td>
+<td>47.957438</td>
+<td>9</td>
+<td>109.776974</td>
+<td>2023-09-11/2023-09-17</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-09-11 16:00:00</td>
+<td>185.493111</td>
+<td>9</td>
+<td>NaN</td>
+<td>2023-09-11/2023-09-17</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2023-09-11 17:00:00</td>
+<td>84.713657</td>
+<td>9</td>
+<td>NaN</td>
+<td>2023-09-11/2023-09-17</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-09-11 18:00:00</td>
+<td>93.173990</td>
+<td>9</td>
+<td>NaN</td>
+<td>2023-09-11/2023-09-17</td>
+</tr>
+</tbody>
+</table>
+
+<p>3003 rows × 4 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que ya tienes un DataFrame 'agua' con un índice datetime y una columna 'consumo'.</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula el promedio de consumo</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>promedio_consumo <span class="op">=</span> agua[<span class="st">'consumo'</span>].mean()</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Agrupa los datos por día y calcula el consumo diario promedio</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>consumo_diario_promedio <span class="op">=</span> agua.resample(<span class="st">'D'</span>)[<span class="st">'consumo'</span>].mean()</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Detecta dónde el consumo diario es mayor al promedio diario</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>dias_anomalos <span class="op">=</span> consumo_diario_promedio[consumo_diario_promedio <span class="op">&gt;</span> promedio_consumo].index</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea un gráfico de barras para la serie temporal de consumo de agua</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>plt.bar(agua.index, agua[<span class="st">'consumo'</span>], width<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">'Consumo Diario'</span>, color<span class="op">=</span><span class="st">'b'</span>)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Resalta los días con datos anómalos</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>anomalous_days <span class="op">=</span> agua.loc[agua.index.isin(dias_anomalos)]</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>plt.bar(anomalous_days.index, anomalous_days[<span class="st">'consumo'</span>], width<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'r'</span>, label<span class="op">=</span><span class="st">'Días Anómalos'</span>)</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fecha'</span>)</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo Diario'</span>)</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Serie Temporal de Consumo de Agua con Días Anómalos Resaltados'</span>)</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-17-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tienes una Serie temporal de consumo diario llamada 'consumo_diario' con un índice datetime.</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># También tienes una lista de días anómalos llamada 'dias_anomalos' que contiene las fechas de los días anómalos.</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar la serie temporal de consumo diario</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>plt.bar(consumo_diario.index, consumo_diario, label<span class="op">=</span><span class="st">'Consumo Diario'</span>, color<span class="op">=</span><span class="st">'lightblue'</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Señalar los días anómalos en rojo</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>plt.bar(dias_anomalos, consumo_diario[dias_anomalos], color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Días Anómalos'</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fecha'</span>)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo Diario'</span>)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Serie Temporal de Consumo de Agua con Días Anómalos'</span>)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>NameError: name 'consumo_diario' is not defined</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 864x432 with 0 Axes&gt;</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tienes un DataFrame llamado 'agua' con un índice datetime y una columna 'consumo'.</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula el promedio diario de consumo</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>consumo_diario_promedio <span class="op">=</span> agua.resample(<span class="st">'D'</span>)[<span class="st">'consumo'</span>].mean()</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Encuentra los días con mayor consumo que el promedio</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>dias_mayor_consumo <span class="op">=</span> consumo_diario_promedio[consumo_diario_promedio <span class="op">&gt;</span> consumo_diario_promedio.mean()]</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar la serie temporal de consumo diario</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>plt.bar(consumo_diario_promedio.index, consumo_diario_promedio, label<span class="op">=</span><span class="st">'Consumo Diario'</span>, color<span class="op">=</span><span class="st">'lightblue'</span>)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Señalar los días con mayor consumo en un color diferente</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> dia <span class="kw">in</span> dias_mayor_consumo.index:</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    plt.axvline(x<span class="op">=</span>dia, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'Días con Mayor Consumo'</span>)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fecha'</span>)</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo Diario'</span>)</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Serie Temporal de Consumo de Agua con Días de Mayor Consumo'</span>)</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-19-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tienes un DataFrame llamado 'agua' con un índice datetime y una columna 'consumo'.</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegúrate de que el índice sea de tipo datetime.</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>agua.index <span class="op">=</span> pd.to_datetime(agua.index)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula el consumo diario sumando los valores de cada día</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>consumo_diario <span class="op">=</span> agua[<span class="st">'consumo'</span>].resample(<span class="st">'D'</span>).<span class="bu">sum</span>()</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Encuentra los días con mayor consumo (puedes ajustar el umbral según tus criterios)</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>umbral <span class="op">=</span> consumo_diario.mean() <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> consumo_diario.std()</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>dias_mayor_consumo <span class="op">=</span> consumo_diario[consumo_diario <span class="op">&gt;</span> umbral]</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar la serie temporal de consumo diario en forma de barras</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>plt.bar(consumo_diario.index, consumo_diario, label<span class="op">=</span><span class="st">'Consumo Diario'</span>, color<span class="op">=</span><span class="st">'lightblue'</span>)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Señalar los días con mayor consumo en rojo</span></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>plt.bar(dias_mayor_consumo.index, dias_mayor_consumo, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Días con Mayor Consumo'</span>)</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fecha'</span>)</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo Diario'</span>)</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Serie Temporal de Consumo de Agua con Días de Mayor Consumo'</span>)</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-20-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tienes un DataFrame llamado 'agua' con un índice datetime y una columna 'consumo'.</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegúrate de que el índice sea de tipo datetime.</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>agua.index <span class="op">=</span> pd.to_datetime(agua.index)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula el consumo diario sumando los valores de cada día</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>consumo_diario <span class="op">=</span> agua[<span class="st">'consumo'</span>].resample(<span class="st">'D'</span>).<span class="bu">sum</span>()</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Identifica los días con consumos anómalos (puedes ajustar el umbral según tus criterios)</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>umbral_superior <span class="op">=</span> consumo_diario.mean() <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> consumo_diario.std()  <span class="co"># Umbral para consumos superiores</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>umbral_inferior <span class="op">=</span> consumo_diario.mean() <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> consumo_diario.std()  <span class="co"># Umbral para consumos inferiores</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>dias_anomalos_superiores <span class="op">=</span> consumo_diario[consumo_diario <span class="op">&gt;</span> umbral_superior]</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>dias_anomalos_inferiores <span class="op">=</span> consumo_diario[consumo_diario <span class="op">&lt;</span> umbral_inferior]</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar la serie temporal de consumo diario en forma de barras</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>plt.bar(consumo_diario.index, consumo_diario, label<span class="op">=</span><span class="st">'Consumo Diario'</span>, color<span class="op">=</span><span class="st">'lightblue'</span>)</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Señalar los días con consumos anómalos (superiores en rojo, inferiores en azul)</span></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>plt.bar(dias_anomalos_superiores.index, dias_anomalos_superiores, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Días con Consumo Superior'</span>)</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>plt.bar(dias_anomalos_inferiores.index, dias_anomalos_inferiores, color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Días con Consumo Inferior'</span>)</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fecha'</span>)</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo Diario'</span>)</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Serie Temporal de Consumo de Agua con Días de Consumo Anómalo'</span>)</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-21-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tienes un DataFrame llamado 'agua' con un índice datetime y una columna 'consumo'.</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegúrate de que el índice sea de tipo datetime.</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>agua.index <span class="op">=</span> pd.to_datetime(agua.index)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula el consumo diario sumando los valores de cada día</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>consumo_diario <span class="op">=</span> agua[<span class="st">'consumo'</span>].resample(<span class="st">'D'</span>).<span class="bu">sum</span>()</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Identifica los días con consumos anómalos (puedes ajustar el umbral según tus criterios)</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>umbral_superior <span class="op">=</span> consumo_diario.mean() <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> consumo_diario.std()  <span class="co"># Umbral para consumos superiores</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>umbral_inferior <span class="op">=</span> consumo_diario.mean() <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> consumo_diario.std()  <span class="co"># Umbral para consumos inferiores</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>dias_anomalos_superiores <span class="op">=</span> consumo_diario[consumo_diario <span class="op">&gt;</span> umbral_superior]</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>dias_anomalos_inferiores <span class="op">=</span> consumo_diario[consumo_diario <span class="op">&lt;</span> umbral_inferior]</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar la serie temporal de consumo diario en forma de barras</span></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>plt.bar(consumo_diario.index, consumo_diario, label<span class="op">=</span><span class="st">'Consumo Diario'</span>, color<span class="op">=</span><span class="st">'lightblue'</span>)</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Señalar los días con consumos anómalos (superiores en rojo, inferiores en azul)</span></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>plt.bar(dias_anomalos_superiores.index, dias_anomalos_superiores, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Días con Consumo Superior'</span>)</span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>plt.bar(dias_anomalos_inferiores.index, dias_anomalos_inferiores, color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Días con Consumo Inferior'</span>)</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Agregar una línea horizontal para el umbral superior</span></span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>plt.axhline(umbral_superior, color<span class="op">=</span><span class="st">'green'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'Umbral Superior'</span>)</span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fecha'</span>)</span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo Diario'</span>)</span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Serie Temporal de Consumo de Agua con Días de Consumo Anómalo'</span>)</span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-22-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tienes un DataFrame llamado 'agua' con una columna 'consumo' y un índice datetime.</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea un boxplot del consumo de agua</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>plt.boxplot(agua[<span class="st">'consumo'</span>], vert<span class="op">=</span><span class="va">False</span>, widths<span class="op">=</span><span class="fl">0.6</span>, patch_artist<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Consumo de Agua'</span>)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Boxplot del Consumo de Agua'</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co"># # Calcula el umbral para identificar outliers</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co"># q1 = agua['consumo'].quantile(0.25)</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co"># q3 = agua['consumo'].quantile(0.75)</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="co"># iqr = q3 - q1</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co"># umbral_superior = q3 + 1.5 * iqr</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co"># umbral_inferior = q1 - 1.5 * iqr</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="co"># # Identifica y señala los datos anómalos (outliers)</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="co"># datos_anomalos = agua[(agua['consumo'] &gt; umbral_superior) | (agua['consumo'] &lt; umbral_inferior)]</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.scatter(datos_anomalos['consumo'], [1] * len(datos_anomalos), color='red', marker='x', label='Datos Anómalos')</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No handles with labels found to put in legend.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-23-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tienes un DataFrame llamado 'agua' con un índice datetime y una columna 'consumo'.</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegúrate de que el índice sea de tipo datetime.</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>agua.index <span class="op">=</span> pd.to_datetime(agua.index)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula el consumo promedio diario</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>consumo_diario_promedio <span class="op">=</span> agua[<span class="st">'consumo'</span>].resample(<span class="st">'D'</span>).mean()</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea un boxplot del consumo promedio diario</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>plt.boxplot(consumo_diario_promedio, vert<span class="op">=</span><span class="va">False</span>, widths<span class="op">=</span><span class="fl">0.6</span>, patch_artist<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Consumo Promedio Diario de Agua'</span>)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Boxplot del Consumo Promedio Diario de Agua'</span>)</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-24-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Establece un umbral para definir los outliers (ajusta según tus criterios)</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>umbral <span class="op">=</span> <span class="fl">1.5</span>  <span class="co"># Puedes cambiar este valor si es necesario</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula el rango intercuartil (IQR) de los datos</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>q1 <span class="op">=</span> np.percentile(consumo_diario_promedio, <span class="dv">25</span>)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>q3 <span class="op">=</span> np.percentile(consumo_diario_promedio, <span class="dv">75</span>)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>iqr <span class="op">=</span> q3 <span class="op">-</span> q1</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula los límites para definir outliers</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>umbral_inferior <span class="op">=</span> q1 <span class="op">-</span> (umbral <span class="op">*</span> iqr)</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>umbral_superior <span class="op">=</span> q3 <span class="op">+</span> (umbral <span class="op">*</span> iqr)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Encuentra los días con consumos promedio anómalos</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>outliers_indices <span class="op">=</span> (consumo_diario_promedio <span class="op">&lt;</span> umbral_inferior) <span class="op">|</span> (consumo_diario_promedio <span class="op">&gt;</span> umbral_superior)</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtiene las fechas correspondientes a los outliers</span></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>fechas_outliers <span class="op">=</span> consumo_diario_promedio.index[outliers_indices]</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Fechas de los outliers:"</span>)</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fechas_outliers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fechas de los outliers:
+DatetimeIndex(['2023-06-22', '2023-06-30', '2023-07-17', '2023-07-19',
+               '2023-07-20', '2023-08-21', '2023-08-24', '2023-09-06',
+               '2023-09-11'],
+              dtype='datetime64[ns]', name='t', freq=None)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tienes un DataFrame llamado 'agua' con un índice datetime y una columna 'consumo'.</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co"># También tienes un DataFrame llamado 'consumo_diario_promedio' con el consumo promedio diario y un índice datetime.</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Y una lista de fechas anómalas llamada 'fechas_outliers' que contiene las fechas de los días anómalos.</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegúrate de que el índice de 'agua' sea de tipo datetime.</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>agua.index <span class="op">=</span> pd.to_datetime(agua.index)</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar la serie temporal de consumo diario en forma de barras</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>plt.bar(agua.index, agua[<span class="st">'consumo'</span>], label<span class="op">=</span><span class="st">'Consumo Diario'</span>, color<span class="op">=</span><span class="st">'lightblue'</span>)</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Señalar los días anómalos en rojo</span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>anomalous_consumption <span class="op">=</span> np.zeros(<span class="bu">len</span>(agua))  <span class="co"># Inicializar un arreglo con ceros</span></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>anomalous_indices <span class="op">=</span> agua.index.isin(fechas_outliers)</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>anomalous_consumption[anomalous_indices] <span class="op">=</span> agua[<span class="st">'consumo'</span>][anomalous_indices]  <span class="co"># Marcador rojo en días anómalos</span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>plt.bar(agua.index, anomalous_consumption, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Días Anómalos'</span>)</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fecha'</span>)</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo Diario'</span>)</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Serie Temporal de Consumo de Agua con Días de Consumo Anómalo'</span>)</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-26-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>agua.loc[fechas_outliers]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="38">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">consumo</th>
+<th data-quarto-table-cell-role="th">Month</th>
+<th data-quarto-table-cell-role="th">Consumo Suavizado</th>
+<th data-quarto-table-cell-role="th">Week</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">t</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-06-22</td>
+<td>0.0</td>
+<td>6</td>
+<td>0.000670</td>
+<td>2023-06-19/2023-06-25</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2023-06-30</td>
+<td>0.0</td>
+<td>6</td>
+<td>0.000000</td>
+<td>2023-06-26/2023-07-02</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-07-17</td>
+<td>0.0</td>
+<td>7</td>
+<td>0.000000</td>
+<td>2023-07-17/2023-07-23</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2023-07-19</td>
+<td>0.0</td>
+<td>7</td>
+<td>0.102299</td>
+<td>2023-07-17/2023-07-23</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-07-20</td>
+<td>0.0</td>
+<td>7</td>
+<td>23.094697</td>
+<td>2023-07-17/2023-07-23</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2023-08-21</td>
+<td>0.0</td>
+<td>8</td>
+<td>0.000000</td>
+<td>2023-08-21/2023-08-27</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-08-24</td>
+<td>0.0</td>
+<td>8</td>
+<td>0.000335</td>
+<td>2023-08-21/2023-08-27</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2023-09-06</td>
+<td>0.0</td>
+<td>9</td>
+<td>0.000000</td>
+<td>2023-09-04/2023-09-10</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-09-11</td>
+<td>0.0</td>
+<td>9</td>
+<td>0.000670</td>
+<td>2023-09-11/2023-09-17</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tienes un DataFrame llamado 'agua' con un índice datetime y una columna 'consumo'.</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegúrate de que el índice sea de tipo datetime.</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>agua.index <span class="op">=</span> pd.to_datetime(agua.index)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula el consumo promedio diario</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>consumo_diario_promedio <span class="op">=</span> agua[<span class="st">'consumo'</span>].resample(<span class="st">'D'</span>).mean()</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula el rango intercuartil (IQR) de los datos</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>q1 <span class="op">=</span> np.percentile(consumo_diario_promedio, <span class="dv">25</span>)</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>q3 <span class="op">=</span> np.percentile(consumo_diario_promedio, <span class="dv">75</span>)</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>iqr <span class="op">=</span> q3 <span class="op">-</span> q1</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula los límites para definir outliers</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>umbral_inferior <span class="op">=</span> q1 <span class="op">-</span> <span class="fl">1.5</span> <span class="op">*</span> iqr</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>umbral_superior <span class="op">=</span> q3 <span class="op">+</span> <span class="fl">1.5</span> <span class="op">*</span> iqr</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Encuentra los outliers (valores que están fuera de los límites)</span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>outliers <span class="op">=</span> consumo_diario_promedio[(consumo_diario_promedio <span class="op">&lt;</span> umbral_inferior) <span class="op">|</span> (consumo_diario_promedio <span class="op">&gt;</span> umbral_superior)]</span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Outliers del consumo promedio diario:"</span>)</span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(outliers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Outliers del consumo promedio diario:
+t
+2023-06-22     62.463487
+2023-06-30    175.094745
+2023-07-17     55.733598
+2023-07-19     57.962785
+2023-07-20     61.349675
+2023-08-21     82.065231
+2023-08-24    137.084177
+2023-09-06    115.593746
+2023-09-11     54.013218
+Name: consumo, dtype: float64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tienes un DataFrame llamado 'agua' con un índice datetime y una columna 'consumo'.</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegúrate de que el índice sea de tipo datetime.</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>agua.index <span class="op">=</span> pd.to_datetime(agua.index)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula el consumo promedio diario</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>consumo_diario_promedio <span class="op">=</span> agua[<span class="st">'consumo'</span>].resample(<span class="st">'D'</span>).mean()</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula el rango intercuartil (IQR) de los datos</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>q1 <span class="op">=</span> np.percentile(consumo_diario_promedio, <span class="dv">25</span>)</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>q3 <span class="op">=</span> np.percentile(consumo_diario_promedio, <span class="dv">75</span>)</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>iqr <span class="op">=</span> q3 <span class="op">-</span> q1</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula los límites para definir outliers</span></span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>umbral_inferior <span class="op">=</span> q1 <span class="op">-</span> <span class="fl">1.5</span> <span class="op">*</span> iqr</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>umbral_superior <span class="op">=</span> q3 <span class="op">+</span> <span class="fl">1.5</span> <span class="op">*</span> iqr</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Encuentra los outliers (valores que están fuera de los límites)</span></span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>outliers <span class="op">=</span> consumo_diario_promedio[(consumo_diario_promedio <span class="op">&lt;</span> umbral_inferior) <span class="op">|</span> (consumo_diario_promedio <span class="op">&gt;</span> umbral_superior)]</span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tienes un DataFrame llamado 'agua' con valores horarios de consumo.</span></span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegúrate de que el índice de 'agua' sea de tipo datetime.</span></span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea una gráfica de barras horaria con valores promedio diarios</span></span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar la serie temporal de consumo horario en forma de barras</span></span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a>plt.bar(agua.index, agua[<span class="st">'consumo'</span>], label<span class="op">=</span><span class="st">'Consumo Horario'</span>, color<span class="op">=</span><span class="st">'lightblue'</span>)</span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Señala los outliers en rojo</span></span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a>outliers_horarios <span class="op">=</span> agua[agua.index.floor(<span class="st">'D'</span>).isin(outliers.index)].index</span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a>plt.bar(outliers_horarios, agua.loc[outliers_horarios, <span class="st">'consumo'</span>], color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Outliers'</span>)</span>
+<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fecha y Hora'</span>)</span>
+<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo de Agua'</span>)</span>
+<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Serie Temporal de Consumo de Agua con Outliers del Consumo Promedio Diario'</span>)</span>
+<span id="cb38-40"><a href="#cb38-40" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb38-41"><a href="#cb38-41" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-29-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="002_analisis_resultado_taller_files/figure-html/281fe2d3-1-image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image.png</figcaption>
+</figure>
+</div>
+<div class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tienes un DataFrame llamado 'agua' con un índice datetime y una columna 'consumo'.</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegúrate de que el índice sea de tipo datetime.</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>agua.index <span class="op">=</span> pd.to_datetime(agua.index)</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula el consumo promedio diario</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>consumo_diario_promedio <span class="op">=</span> agua[<span class="st">'consumo'</span>].resample(<span class="st">'D'</span>).mean()</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula el rango intercuartil (IQR) de los datos</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>q1 <span class="op">=</span> np.percentile(consumo_diario_promedio, <span class="dv">25</span>)</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>q3 <span class="op">=</span> np.percentile(consumo_diario_promedio, <span class="dv">75</span>)</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>iqr <span class="op">=</span> q3 <span class="op">-</span> q1</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula los límites para definir outliers</span></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>umbral_inferior <span class="op">=</span> q1 <span class="op">-</span> <span class="fl">1.5</span> <span class="op">*</span> iqr</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>umbral_superior <span class="op">=</span> q3 <span class="op">+</span> <span class="fl">1.5</span> <span class="op">*</span> iqr</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Encuentra los outliers (valores que están fuera de los límites)</span></span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>outliers <span class="op">=</span> consumo_diario_promedio[(consumo_diario_promedio <span class="op">&lt;</span> umbral_inferior) <span class="op">|</span> (consumo_diario_promedio <span class="op">&gt;</span> umbral_superior)]</span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tienes un DataFrame llamado 'agua' con valores diarios de consumo.</span></span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegúrate de que el índice de 'agua' sea de tipo datetime.</span></span>
+<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea una gráfica de barras diaria con valores promedio diarios</span></span>
+<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar la serie temporal de consumo diario en forma de barras</span></span>
+<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a>plt.bar(consumo_diario_promedio.index, consumo_diario_promedio, label<span class="op">=</span><span class="st">'Consumo Promedio Diario'</span>, color<span class="op">=</span><span class="st">'lightblue'</span>)</span>
+<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Señala los outliers en rojo</span></span>
+<span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a>outlier_dates <span class="op">=</span> outliers.index</span>
+<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a>plt.bar(outlier_dates, outliers, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Outliers'</span>)</span>
+<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-37"><a href="#cb39-37" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fecha'</span>)</span>
+<span id="cb39-38"><a href="#cb39-38" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo Promedio Diario de Agua'</span>)</span>
+<span id="cb39-39"><a href="#cb39-39" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Serie Temporal de Consumo Promedio Diario de Agua con Outliers'</span>)</span>
+<span id="cb39-40"><a href="#cb39-40" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb39-41"><a href="#cb39-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-30-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="002_analisis_resultado_taller_files/figure-html/6bc87404-1-image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">image.png</figcaption>
+</figure>
+</div>
+<div class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tienes un DataFrame llamado 'agua' con un índice datetime y una columna 'consumo'.</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegúrate de que el índice sea de tipo datetime.</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>agua.index <span class="op">=</span> pd.to_datetime(agua.index)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea una gráfica de violín del consumo de agua</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>sns.violinplot(x<span class="op">=</span>agua[<span class="st">'consumo'</span>], palette<span class="op">=</span><span class="st">"Set3"</span>)</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Consumo de Agua'</span>)</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Gráfica de Violín del Consumo de Agua'</span>)</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-31-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Supongamos que tienes un DataFrame llamado 'agua' con un índice datetime y una columna 'consumo'.</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegúrate de que el índice sea de tipo datetime.</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>agua.index <span class="op">=</span> pd.to_datetime(agua.index)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Agrupa los datos por semana</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>agua_semanal <span class="op">=</span> agua.resample(<span class="st">'W-SUN'</span>).<span class="bu">sum</span>()  <span class="co"># Supongamos que deseas la suma del consumo semanal</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea una gráfica de violín del consumo de agua por semana</span></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>sns.violinplot(x<span class="op">=</span>agua_semanal.index.week, y<span class="op">=</span>agua_semanal[<span class="st">'consumo'</span>], palette<span class="op">=</span><span class="st">"Set3"</span>)</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Semana del Año'</span>)</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Consumo de Agua'</span>)</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribución del Consumo de Agua por Semana (Gráfica de Violín)'</span>)</span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>FutureWarning: weekofyear and week have been deprecated, please use DatetimeIndex.isocalendar().week instead, which returns a Series.  To exactly reproduce the behavior of week and weekofyear and return an Index, you may call pd.Int64Index(idx.isocalendar().week)
+  sns.violinplot(x=agua_semanal.index.week, y=agua_semanal['consumo'], palette="Set3")</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="002_analisis_resultado_taller_files/figure-html/cell-32-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
